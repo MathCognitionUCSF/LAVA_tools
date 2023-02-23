@@ -1,8 +1,13 @@
-# Data Importing Functions
+# %% LAVA Data Importing Functions by Rian Bogley #############################
+###############################################################################
+# %% PACKAGES #################################################################
 # Import Packages
 import os
 import pandas as pd
-
+###############################################################################
+# %% GLOBAL VARIABLES #########################################################
+###############################################################################
+# %% FUNCTIONS ################################################################
 # Import Input CSV File
 def import_input_csv(input_csv):
     """
@@ -28,27 +33,18 @@ def import_input_csv(input_csv):
         # Create a copy of df['DCDate'] column and name it DCDate_input
         df['DCDate_input'] = df['DCDate']
     return df
-
+###############################################################################
 # Import LAVA Query File
 def import_lava_query(lava_queries_dir, type):
     """
     Import LAVA Query Data
-
-    Some possible types include:
-        demographics
-        diagnosis
-        ni_all
-        bedside
-        mmse
-        language
-        cdr
     """
     df = pd.read_excel(find_files(lava_queries_dir,type), sheet_name=0)
     # If no file is found, return error:
     if df.empty:
         print('No file found for type: ' + type)
     return df
-
+###############################################################################
 # Import LAVA Data Dictionary
 def import_lava_dict(lava_queries_dir):
     """
@@ -59,7 +55,7 @@ def import_lava_dict(lava_queries_dir):
     if df.empty:
         print('No LAVA Data Dictionary file found. Please download the most up-to-date version from LAVA Query and put it in the lava_queries directory.')
     return df
-
+###############################################################################
 # Find files in directory based on specicific string in filename.
 def find_files(dir_name, string):
     """
@@ -73,3 +69,4 @@ def find_files(dir_name, string):
         print('No file found for ' + string + '. Please fix and try again.')
     else:
         return os.path.join(dir_name, files[0])
+###############################################################################
